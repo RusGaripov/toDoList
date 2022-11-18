@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+input{
+    margin-top: 20px;
+}
+
+button{
+    background:rgb(130, 255, 102);
+    width: 80px;
+    margin-top: 20px;
+}

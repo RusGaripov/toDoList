@@ -1,0 +1,44 @@
+.container{
+    max-width: 900px;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+body {
+    padding: 2em;
+  }
+  
+  table.table { width: 100%; }
+  
+  .table th, .table td { 
+    text-align: left; 
+    padding: 0.25em;
+    border: 1px solid;
+  }
+  
+  .table tr { 
+    border-bottom: 1px solid #DDD;
+  }
+  td.editButtons { text-align: center}
+  button { 
+    border-radius: 3px; 
+    border: none; 
+    margin: 0 0.25em; 
+    transition: all 0.3s;
+  }
+  
+  button:hover { 
+    box-shadow: 0 0 4px rgba(3,3,3,0.8); 
+    opacity: 0.9;
+  }
+  
+  button.edit { background: rgb(130, 255, 102); }
+  button.delete { background: rgb(255, 102, 247); }
+  button.create { 
+    background: red;
+    height:40px;
+    width:100px;
+    margin: 1px 0px 0px 10px;
+    cursor: pointer;
+}
