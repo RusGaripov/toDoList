@@ -68,9 +68,9 @@ export const getToDo = (id) => (dispatch, getState) => {
 
 // update ToDo Item 
 
-export const updateToDo = ({ id, header, description, isDone, deadline }) => (dispatch, getState) => {
+export const updateToDo = ({ id, header, description, isDone, deadline, files}) => (dispatch, getState) => {
 
-    const updatedToDo = { id, header, description, isDone, deadline }
+    const updatedToDo = { id, header, description, isDone, deadline, files }
 
     const updatedToDos = getState().toDoList.toDos.filter(x => x.id !== id);
 

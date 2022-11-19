@@ -24,7 +24,8 @@ const EditToDoScreen = () => {
     const [header, setHeader] = useState('')
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState('')
-    // const [files, setFiles] = useState('')
+    const [files, setFiles] = useState('')
+    const [filename, setFilename] = useState('')
 
     const [checked, setChecked] = useState(false);
 
@@ -49,7 +50,7 @@ const EditToDoScreen = () => {
                 description,
                 isDone,
                 deadline: isDone ? finishedTime : deadline,
-                // files
+                files,
             }))
         navigate('/')
     }
@@ -58,6 +59,15 @@ const EditToDoScreen = () => {
         setChecked(!checked);
         setIsDone(!isDone)
     };
+
+    const fileUploadHandler = (e) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            localStorage.setItem("recent-image", reader.result)
+            setFiles(reader.result)
+        })
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     return loading ? <div>No Data</div> : (
         <form
@@ -73,14 +83,12 @@ const EditToDoScreen = () => {
             />
             <input
                 type="file"
+                name="files[]"
+                id="fileUpload"
+                onChange={fileUploadHandler}
+                accept=".jpg, .jpeg, .png"
                 // value={files}
                 placeholder='Прикрепленные файлы'
-                onChange={(e) => {
-                    // setFiles(e.target.files[0].name)
-                }
-                }
-                accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                multiple
             />
             <p style={{ marginBottom: '0px', marginTop: '30px', fontSize: '12px' }}>
                 Поставьте галочку, если задача выполнена

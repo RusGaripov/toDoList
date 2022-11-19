@@ -27,9 +27,17 @@ const CreateToDoScreen = () => {
                 description,
                 deadline,
                 files,
-                isDone
+                isDone,
             }))
         navigate('/')
+    }
+
+    const fileUploadHandler = (e) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            setFiles(reader.result)
+        })
+        reader.readAsDataURL(e.target.files[0])
     }
 
     return (
@@ -41,15 +49,12 @@ const CreateToDoScreen = () => {
                 placeholder='Дата завершения'
                 onChange={(e) => setDeadline(e.target.value)}
             />
+            <p style={{ marginBottom: '0px' }}>Файлы .docx | .jpg | .png</p>
             <input
                 type="file"
-                placeholder='Прикрепленные файлы'
-                onChange={(e) => {
-                    setFiles(e.target.files[0].name)
-                }
-                }
-                accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                multiple
+                name="files[]"
+                id="fileUpload"
+                onChange={fileUploadHandler}
             />
             <button type='submit'>Create</button>
         </form>

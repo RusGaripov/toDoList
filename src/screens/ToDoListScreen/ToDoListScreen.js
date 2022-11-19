@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToDos, deleteToDo } from '../../actions/toDoListActions'
 import { Link } from 'react-router-dom'
 import styles from './ToDoListScreen.module.css'
 
+
 const ToDoListScreen = () => {
+    // const ref = useRef(null);
+    const refs = useRef([])
+    const refs2 = useRef([])
+    const ref3 = useRef()
 
     const dispatch = useDispatch()
 
@@ -17,6 +22,20 @@ const ToDoListScreen = () => {
 
     useEffect(() => {
         dispatch(getToDos())
+
+
+        for (let i = 0; i < toDos.length; i++) {
+            if (toDos[i].files) {
+                if (toDos[i].files.toString().slice(0, 10) === 'data:image') {
+                    refs.current[i].setAttribute("src", toDos[i].files)
+                }
+
+                else {
+                    refs2.current[i].setAttribute("href", toDos[i].files)
+                }
+            }
+        }
+
     }, [dispatch])
 
     const deleteHandler = (id) => {
@@ -38,7 +57,7 @@ const ToDoListScreen = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {toDos.map((toDo) => {
+                    {toDos.map((toDo, index) => {
                         return (
                             <tr key={toDo.id}>
                                 <td>{toDo.header}</td>
@@ -54,7 +73,21 @@ const ToDoListScreen = () => {
                                     :
                                     <td style={{ background: 'red' }}>{toDo.deadline}</td>
                                 }
-                                <td>{toDo.files}</td>
+                                {/* <td>{toDo.files}</td> */}
+
+                                <td>
+                                    {toDo.files.toString().slice(0, 10) === "data:image" ? <img
+                                        className={styles.image}
+                                        ref={(element) => { refs.current[index] = element }}
+                                        src=""
+                                        alt="Preview"
+                                    /> :
+                                        <a 
+                                        ref={(element) => { refs2.current[index] = element }} 
+                                        href="">Скачать файл
+                                        </a>
+                                    }
+                                </td>
                                 <td className={styles.editButtons}>
                                     <Link to={`/edit/${toDo.id}`}><button className={styles.edit}>Edit</button></Link>
                                     <button onClick={() => deleteHandler(toDo.id)} className={styles.delete}>Delete</button>
