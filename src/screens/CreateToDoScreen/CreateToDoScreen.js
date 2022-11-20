@@ -16,7 +16,7 @@ const CreateToDoScreen = () => {
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState('')
     const [isDone, setIsDone] = useState(false)
-    const [files, setFiles] = useState('')
+    const [file, setFile] = useState('')
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -26,7 +26,7 @@ const CreateToDoScreen = () => {
                 header,
                 description,
                 deadline,
-                files,
+                file,
                 isDone,
             }))
         navigate('/')
@@ -35,7 +35,7 @@ const CreateToDoScreen = () => {
     const fileUploadHandler = (e) => {
         const reader = new FileReader();
         reader.addEventListener("load", () => {
-            setFiles(reader.result)
+            setFile(reader.result)
         })
         reader.readAsDataURL(e.target.files[0])
     }

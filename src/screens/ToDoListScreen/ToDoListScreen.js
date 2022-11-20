@@ -6,10 +6,9 @@ import styles from './ToDoListScreen.module.css'
 
 
 const ToDoListScreen = () => {
-    // const ref = useRef(null);
+
     const refs = useRef([])
     const refs2 = useRef([])
-    const ref3 = useRef()
 
     const dispatch = useDispatch()
 
@@ -21,17 +20,17 @@ const ToDoListScreen = () => {
     const today = Math.floor(Date.now() / 1000)
 
     useEffect(() => {
+
         dispatch(getToDos())
 
-
         for (let i = 0; i < toDos.length; i++) {
-            if (toDos[i].files) {
-                if (toDos[i].files.toString().slice(0, 10) === 'data:image') {
-                    refs.current[i].setAttribute("src", toDos[i].files)
+            if (toDos[i].file) {
+                if (toDos[i].file.toString().slice(0, 10) === 'data:image') {
+                    refs.current[i].setAttribute("src", toDos[i].file)
                 }
 
                 else {
-                    refs2.current[i].setAttribute("href", toDos[i].files)
+                    refs2.current[i].setAttribute("href", toDos[i].file)
                 }
             }
         }
@@ -73,10 +72,8 @@ const ToDoListScreen = () => {
                                     :
                                     <td style={{ background: 'red' }}>{toDo.deadline}</td>
                                 }
-                                {/* <td>{toDo.files}</td> */}
-
                                 <td>
-                                    {toDo.files.toString().slice(0, 10) === "data:image" ? <img
+                                    {toDo.file&&toDo.file.toString().slice(0, 10) === "data:image" ? <img
                                         className={styles.image}
                                         ref={(element) => { refs.current[index] = element }}
                                         src=""
@@ -84,7 +81,7 @@ const ToDoListScreen = () => {
                                     /> :
                                         <a 
                                         ref={(element) => { refs2.current[index] = element }} 
-                                        href="">Скачать файл
+                                        href="/">Скачать файл
                                         </a>
                                     }
                                 </td>

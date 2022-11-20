@@ -33,9 +33,9 @@ export const getToDos = () => (dispatch) => {
     }
 }
 // create new ToDo
-export const createToDo = ({ id, header, description, isDone, deadline, files }) => (dispatch, getState) => {
+export const createToDo = ({ id, header, description, isDone, deadline, file }) => (dispatch, getState) => {
 
-    const newToDo = { id, header, description, isDone, deadline, files }
+    const newToDo = { id, header, description, isDone, deadline, file }
 
     dispatch({
         type: TO_DO_CREATE_SUCCESS,
@@ -68,9 +68,9 @@ export const getToDo = (id) => (dispatch, getState) => {
 
 // update ToDo Item 
 
-export const updateToDo = ({ id, header, description, isDone, deadline, files}) => (dispatch, getState) => {
+export const updateToDo = ({ id, header, description, isDone, deadline, file}) => (dispatch, getState) => {
 
-    const updatedToDo = { id, header, description, isDone, deadline, files }
+    const updatedToDo = { id, header, description, isDone, deadline, file }
 
     const updatedToDos = getState().toDoList.toDos.filter(x => x.id !== id);
 

@@ -24,8 +24,7 @@ const EditToDoScreen = () => {
     const [header, setHeader] = useState('')
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState('')
-    const [files, setFiles] = useState('')
-    const [filename, setFilename] = useState('')
+    const [file, setFile] = useState('')
 
     const [checked, setChecked] = useState(false);
 
@@ -36,8 +35,8 @@ const EditToDoScreen = () => {
         setDeadline(toDo.deadline)
         setIdToDo(toDo.id)
         setIsDone(toDo.isDone)
-        // setFiles(toDo.files)
-    }, [toDo])
+        setFile(toDo.file)
+    }, [toDo, dispatch, id])
 
 
     const submitHandler = (e) => {
@@ -50,7 +49,7 @@ const EditToDoScreen = () => {
                 description,
                 isDone,
                 deadline: isDone ? finishedTime : deadline,
-                files,
+                file,
             }))
         navigate('/')
     }
@@ -63,8 +62,7 @@ const EditToDoScreen = () => {
     const fileUploadHandler = (e) => {
         const reader = new FileReader();
         reader.addEventListener("load", () => {
-            localStorage.setItem("recent-image", reader.result)
-            setFiles(reader.result)
+            setFile(reader.result)
         })
         reader.readAsDataURL(e.target.files[0])
     }
@@ -87,7 +85,6 @@ const EditToDoScreen = () => {
                 id="fileUpload"
                 onChange={fileUploadHandler}
                 accept=".jpg, .jpeg, .png"
-                // value={files}
                 placeholder='Прикрепленные файлы'
             />
             <p style={{ marginBottom: '0px', marginTop: '30px', fontSize: '12px' }}>
