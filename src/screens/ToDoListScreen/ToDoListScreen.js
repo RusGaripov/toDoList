@@ -7,7 +7,10 @@ import styles from './ToDoListScreen.module.css'
 
 const ToDoListScreen = () => {
 
+    // refs - для картинок
     const refs = useRef([])
+
+    // refs2 - для файлов docx
     const refs2 = useRef([])
 
     const dispatch = useDispatch()

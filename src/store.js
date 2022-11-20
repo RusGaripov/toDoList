@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { toDoListReducer,toDoDetailsReducer} from './reducers/toDoReducer';
 
-
+// get data from LocalStroage
 const toDosFromStorage = localStorage.getItem('toDos')
     ? JSON.parse(localStorage.getItem('toDos'))
     : []

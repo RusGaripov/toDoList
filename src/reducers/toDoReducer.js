@@ -19,11 +19,11 @@ export const toDoListReducer = (state = { toDos: [] }, action) => {
         case TO_DO_LIST_FAIL:
             return { loading: false, error: action.payload }
         case TO_DO_CREATE_SUCCESS:
-            return { loading: false, success: true, toDos: [...state.toDos, action.payload] }
+            return { loading: false, toDos: [...state.toDos, action.payload] }
         case TO_DO_UPDATE_SUCCESS:
-            return { loading: false, success: true, toDos: action.payload }
+            return { loading: false, toDos: action.payload }
         case TO_DO_DELETE_SUCCESS:
-            return { loading: false, success: true, toDos: action.payload }
+            return { loading: false, toDos: action.payload }
         default:
             return state
     }
